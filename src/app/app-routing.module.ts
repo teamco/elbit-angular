@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { DashComponent } from './dash/dash.component';
+
+const routes: Routes = [{ path: 'configuration', component: DashComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
