@@ -3,7 +3,8 @@
   <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}"
                  rowHeight="200px">
     <!--Mini Cards-->
-    <div *ngIf="miniCardsOH; else elseBlock">
+    <div *ngIf="miniCardsOH; else elseBlock"
+         style="position: relative">
       <div cdkDropList
            [cdkDropListData]="miniCardData"
            cdkDropListOrientation="horizontal"
@@ -24,6 +25,7 @@
     </div>
     <ng-template #elseBlock>
       <div cdkDropList
+           style="position: relative"
            class="mini-cards"
            (cdkDropListDropped)="dropMiniCard($event)">
         <mat-grid-tile *ngFor="let mc of miniCardData"
@@ -40,36 +42,38 @@
     </ng-template>
 
     <!--Charts-->
-<!--    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
-<!--                   [rowspan]="( cardLayout | async )?.chart?.rows">-->
-<!--      <app-card title="Monthly Revenue">-->
-<!--        <app-annual-sales-chart></app-annual-sales-chart>-->
-<!--      </app-card>-->
-<!--    </mat-grid-tile>-->
-<!--    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
-<!--                   [rowspan]="( cardLayout | async )?.chart?.rows">-->
-<!--      <app-card title="Product Sales">-->
-<!--        <app-product-sales-chart></app-product-sales-chart>-->
-<!--      </app-card>-->
-<!--    </mat-grid-tile>-->
-<!--    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
-<!--                   [rowspan]="( cardLayout | async )?.chart?.rows">-->
-<!--      <app-card title="Sales by Traffic Source">-->
-<!--        <app-sales-traffic-chart></app-sales-traffic-chart>-->
-<!--      </app-card>-->
-<!--    </mat-grid-tile>-->
-<!--    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
-<!--                   [rowspan]="( cardLayout | async )?.chart?.rows">-->
-<!--      <app-card title="Online Store Sessions by Traffic Source">-->
-<!--        <app-store-sessions-chart></app-store-sessions-chart>-->
-<!--      </app-card>-->
-<!--    </mat-grid-tile>-->
+<!--    <div class="cards-container" style="marginTop: -{{cardsMarginTop}}px">-->
+<!--      <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
+<!--                     [rowspan]="( cardLayout | async )?.chart?.rows">-->
+<!--        <app-card title="Monthly Revenue">-->
+<!--          <app-annual-sales-chart></app-annual-sales-chart>-->
+<!--        </app-card>-->
+<!--      </mat-grid-tile>-->
+<!--      <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
+<!--                     [rowspan]="( cardLayout | async )?.chart?.rows">-->
+<!--        <app-card title="Product Sales">-->
+<!--          <app-product-sales-chart></app-product-sales-chart>-->
+<!--        </app-card>-->
+<!--      </mat-grid-tile>-->
+<!--      <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
+<!--                     [rowspan]="( cardLayout | async )?.chart?.rows">-->
+<!--        <app-card title="Sales by Traffic Source">-->
+<!--          <app-sales-traffic-chart></app-sales-traffic-chart>-->
+<!--        </app-card>-->
+<!--      </mat-grid-tile>-->
+<!--      <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
+<!--                     [rowspan]="( cardLayout | async )?.chart?.rows">-->
+<!--        <app-card title="Online Store Sessions by Traffic Source">-->
+<!--          <app-store-sessions-chart></app-store-sessions-chart>-->
+<!--        </app-card>-->
+<!--      </mat-grid-tile>-->
+<!--    </div>-->
     <!--Table-->
-<!--    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols"-->
-<!--                   [rowspan]="( cardLayout | async )?.table?.rows">-->
-<!--      <app-card title="Grid">-->
-<!--        <app-orders-table></app-orders-table>-->
-<!--      </app-card>-->
-<!--    </mat-grid-tile>-->
+    <!--    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols"-->
+    <!--                   [rowspan]="( cardLayout | async )?.table?.rows">-->
+    <!--      <app-card title="Grid">-->
+    <!--        <app-orders-table></app-orders-table>-->
+    <!--      </app-card>-->
+    <!--    </mat-grid-tile>-->
   </mat-grid-list>
 </div>

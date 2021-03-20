@@ -29,11 +29,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MiniCardComponent } from './mini-card/mini-card.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {RuntimeComponent} from './runtime/runtime.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
+    RuntimeComponent,
     DashComponent,
     CardComponent,
     ProductSalesChartComponent,

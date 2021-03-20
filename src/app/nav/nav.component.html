@@ -6,15 +6,21 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item
+         [routerLinkActive]="['is-active']"
+         [routerLinkActiveOptions]="{exact: true}"
          [routerLink]="'/configuration'">
         Configuration
       </a>
-      <div class="drag-card">
+      <div class="drag-card" *ngIf="routeIsActive('/configuration')">
         <div *ngFor="let mc of dragItems?.mini"
              (mousedown)="handleDrag(drawer, mc)">
           <div>{{mc?.entity?.title}}</div>
         </div>
       </div>
+      <a mat-list-item
+         [routerLink]="'/runtime'">
+        Runtime
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

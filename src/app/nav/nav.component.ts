@@ -6,6 +6,7 @@ import {StoreSummaryService} from '../../services/store.summary.service';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 import {StateStoreService} from '../../services/state.store.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -37,6 +38,7 @@ export class NavComponent implements AfterViewInit, OnDestroy, OnInit {
   constructor(
     // tslint:disable-next-line:variable-name
     private _overlay: Overlay,
+    private router: Router,
     // tslint:disable-next-line:variable-name
     private _viewContainerRef: ViewContainerRef,
     private breakpointObserver: BreakpointObserver,
@@ -96,5 +98,10 @@ export class NavComponent implements AfterViewInit, OnDestroy, OnInit {
     this.currentItem = dragItem;
     // tslint:disable-next-line:no-unused-expression
     !dragItem.assigned && this.stateStore.assign('mini', dragItem);
+  }
+
+  // tslint:disable-next-line:typedef
+  routeIsActive(routePath: string) {
+    return this.router.url === routePath;
   }
 }

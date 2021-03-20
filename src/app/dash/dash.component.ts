@@ -13,6 +13,7 @@ import {StateStoreService} from '../../services/state.store.service';
 })
 
 export class DashComponent implements OnInit, AfterContentInit {
+  public cardsMarginTop: number | undefined;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -60,18 +61,24 @@ export class DashComponent implements OnInit, AfterContentInit {
       next: store => {
         // @ts-ignore
         this.miniCardData = [...store.mini.filter(mini => mini.assigned).map(i => i.entity)];
-        this.fixContainerHeight();
+        this.handleResize();
+        this.cardsMarginTop = this.miniCardData.length * this.defaultMiniCardsHeight;
       }
     });
   }
 
   // tslint:disable-next-line:typedef
   ngAfterContentInit() {
+    this.handleResize();
+  }
+
+  // tslint:disable-next-line:typedef
+  handleResize() {
     setTimeout(() => {
       // Handle lazy drag init
       window.dispatchEvent(new Event('resize'));
       window.dispatchEvent(new Event('resize'));
-    }, 1000);
+    }, 300);
   }
 
   // tslint:disable-next-line:typedef
