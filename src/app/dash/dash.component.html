@@ -1,46 +1,75 @@
 <div class="grid-container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}"
+                 rowHeight="200px">
     <!--Mini Cards-->
-    <mat-grid-tile *ngFor="let mc of miniCardData"
-                   [colspan]="( cardLayout | async )?.miniCard?.cols"
-                   [rowspan]="( cardLayout | async )?.miniCard?.rows">
-      <app-mini-card [title]="mc.title"
-                     [value]="mc.value"
-                     [color]="mc.color"
-                     [percentValue]="mc.percentValue"></app-mini-card>
-    </mat-grid-tile>
+    <div *ngIf="miniCardsOH; else elseBlock">
+      <div cdkDropList
+           [cdkDropListData]="miniCardData"
+           cdkDropListOrientation="horizontal"
+           class="mini-cards"
+           (cdkDropListDropped)="dropMiniCard($event)">
+        <mat-grid-tile *ngFor="let mc of miniCardData"
+                       class="dashboard-tile"
+                       cdkDrag
+                       [colspan]="( cardLayout | async )?.miniCard?.cols"
+                       [rowspan]="( cardLayout | async )?.miniCard?.rows">
+          <app-mini-card [title]="mc.title"
+                         [value]="mc.value"
+                         (deleteRequest)="crossOffItem($event)"
+                         [color]="mc.color"
+                         [percentValue]="mc.percentValue"></app-mini-card>
+        </mat-grid-tile>
+      </div>
+    </div>
+    <ng-template #elseBlock>
+      <div cdkDropList
+           class="mini-cards"
+           (cdkDropListDropped)="dropMiniCard($event)">
+        <mat-grid-tile *ngFor="let mc of miniCardData"
+                       class="dashboard-tile"
+                       cdkDrag
+                       [colspan]="( cardLayout | async )?.miniCard?.cols"
+                       [rowspan]="( cardLayout | async )?.miniCard?.rows">
+          <app-mini-card [title]="mc.title"
+                         [value]="mc.value"
+                         [color]="mc.color"
+                         [percentValue]="mc.percentValue"></app-mini-card>
+        </mat-grid-tile>
+      </div>
+    </ng-template>
+
     <!--Charts-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
-                   [rowspan]="( cardLayout | async )?.chart?.rows">
-      <app-card title="Monthly Revenue">
-        <app-annual-sales-chart></app-annual-sales-chart>
-      </app-card>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
-                   [rowspan]="( cardLayout | async )?.chart?.rows">
-      <app-card title="Product Sales">
-        <app-product-sales-chart></app-product-sales-chart>
-      </app-card>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
-                   [rowspan]="( cardLayout | async )?.chart?.rows">
-      <app-card title="Sales by Traffic Source">
-        <app-sales-traffic-chart></app-sales-traffic-chart>
-      </app-card>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"
-                   [rowspan]="( cardLayout | async )?.chart?.rows">
-      <app-card title="Online Store Sessions by Traffic Source">
-        <app-store-sessions-chart></app-store-sessions-chart>
-      </app-card>
-    </mat-grid-tile>
+<!--    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
+<!--                   [rowspan]="( cardLayout | async )?.chart?.rows">-->
+<!--      <app-card title="Monthly Revenue">-->
+<!--        <app-annual-sales-chart></app-annual-sales-chart>-->
+<!--      </app-card>-->
+<!--    </mat-grid-tile>-->
+<!--    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
+<!--                   [rowspan]="( cardLayout | async )?.chart?.rows">-->
+<!--      <app-card title="Product Sales">-->
+<!--        <app-product-sales-chart></app-product-sales-chart>-->
+<!--      </app-card>-->
+<!--    </mat-grid-tile>-->
+<!--    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
+<!--                   [rowspan]="( cardLayout | async )?.chart?.rows">-->
+<!--      <app-card title="Sales by Traffic Source">-->
+<!--        <app-sales-traffic-chart></app-sales-traffic-chart>-->
+<!--      </app-card>-->
+<!--    </mat-grid-tile>-->
+<!--    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols"-->
+<!--                   [rowspan]="( cardLayout | async )?.chart?.rows">-->
+<!--      <app-card title="Online Store Sessions by Traffic Source">-->
+<!--        <app-store-sessions-chart></app-store-sessions-chart>-->
+<!--      </app-card>-->
+<!--    </mat-grid-tile>-->
     <!--Table-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols"
-                   [rowspan]="( cardLayout | async )?.table?.rows">
-      <app-card title="Grid">
-        <app-orders-table></app-orders-table>
-      </app-card>
-    </mat-grid-tile>
+<!--    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols"-->
+<!--                   [rowspan]="( cardLayout | async )?.table?.rows">-->
+<!--      <app-card title="Grid">-->
+<!--        <app-orders-table></app-orders-table>-->
+<!--      </app-card>-->
+<!--    </mat-grid-tile>-->
   </mat-grid-list>
 </div>

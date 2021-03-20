@@ -5,11 +5,16 @@
                [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a *ngFor="let item of menuItems"
-         mat-list-item
-         [routerLink]="'/'+item">
-        {{item | titlecase}}
+      <a mat-list-item
+         [routerLink]="'/configuration'">
+        Configuration
       </a>
+      <div class="drag-card">
+        <div *ngFor="let mc of dragItems?.mini"
+             (mousedown)="handleDrag(drawer, mc)">
+          <div>{{mc?.entity?.title}}</div>
+        </div>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

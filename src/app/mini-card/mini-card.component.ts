@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-mini-card',
@@ -16,6 +16,15 @@ export class MiniCardComponent {
   @Input() duration: string | undefined;
   @Input() percentValue: string | undefined;
 
+  // tslint:disable-next-line:no-output-on-prefix
+  @Output() public deleteRequest = new EventEmitter<{ title: string | undefined }>();
+
   constructor() {
+  }
+
+  // tslint:disable-next-line:typedef
+  onRemoveItem() {
+    const item = {title: this.title};
+    this.deleteRequest.emit(item);
   }
 }

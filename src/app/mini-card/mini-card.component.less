@@ -6,6 +6,14 @@
   bottom: 15px;
   display: flex;
   flex-direction: column;
+
+  &:hover {
+    cursor: move;
+  }
+
+  &:active {
+    z-index: 10;
+  }
 }
 
 .value-text {
@@ -47,4 +55,10 @@
 
 .red-text {
   color: red;
+}
+
+.more-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
